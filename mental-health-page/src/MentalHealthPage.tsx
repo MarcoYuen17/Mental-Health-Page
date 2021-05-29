@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import './App.css';
+import { BreathingGif } from './BreathingGif';
+import { Links } from './Links';
 
 type TabType = 'gif' | 'links' | 'journal';
 
@@ -9,10 +11,13 @@ const MentalHealthPage = () => {
   return (
     <div className="App">
       <div>
-        Gif
+        Header
       </div>
       <div>
-        Links
+        <BreathingGif />
+      </div>
+      <div>
+        <Links />
       </div>
       <div>
         Journal
