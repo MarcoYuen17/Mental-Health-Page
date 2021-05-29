@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import './App.css';
+import './MentalHealthPage.scss';
 import { BreathingGif } from './BreathingGif';
 import { Links } from './Links';
+import { Header } from './Header';
 
-type TabType = 'gif' | 'links' | 'journal';
+export type TabType = 'gif' | 'links' | 'journal';
 
 const MentalHealthPage = () => {
   const [selectedTab, setSelectedTab] = useState<TabType>('gif');
@@ -11,7 +12,7 @@ const MentalHealthPage = () => {
   return (
     <div className="App">
       <div>
-        Header
+        <Header activeTab={selectedTab} onChangeSelected={setSelectedTab} />
       </div>
       <div>
         <BreathingGif />

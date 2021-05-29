@@ -1,0 +1,14 @@
+.header {
+  &-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  &-label {
+    text-align: center;
+
+    &-selected {
+      border: 1px solid lightskyblue;
+    }
+  }
+}
