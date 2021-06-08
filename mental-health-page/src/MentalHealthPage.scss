@@ -48,3 +48,22 @@ html, body, #root {
     }
   }
 }
+
+.journal {
+  display: grid;
+  grid-template-columns: 80% 20%;
+  grid-template-rows: 80% 20%;
+  width: 100%;
+  height: 100%;
+
+  &-field {
+    grid-column: 2;
+    grid-row: 1;
+    resize: none;
+  }
+
+  .button {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}

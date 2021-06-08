@@ -2,9 +2,10 @@ import { useState } from 'react';
 import './MentalHealthPage.scss';
 import { BreathingGif } from './BreathingGif';
 import { Links } from './Links';
+import { Journal } from './Journal';
 import { Header } from './Header';
 
-export type TabType = 'gif' | 'links' | 'journal';
+export type TabType = 'gif' | 'journal' | 'links';
 
 const MentalHealthPage = () => {
   const [selectedTab, setSelectedTab] = useState<TabType>('gif');
@@ -22,11 +23,11 @@ const MentalHealthPage = () => {
       <div className='mental-health-page-content mental-health-page-content-col1' id='gif'>
         <BreathingGif />
       </div>
-      <div className='mental-health-page-content mental-health-page-content-col2' id='links'>
-        <Links />
+      <div className='mental-health-page-content mental-health-page-content-col2' id='journal'>
+        <Journal />
       </div>
-      <div className='mental-health-page-content mental-health-page-content-col3' id='journal'>
-        Journal
+      <div className='mental-health-page-content mental-health-page-content-col3' id='links'>
+        <Links />
       </div>
     </div>
   );

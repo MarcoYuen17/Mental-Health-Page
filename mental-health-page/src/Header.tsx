@@ -23,7 +23,7 @@ type HeaderProps = {
 };
 
 export const Header: React.FC<HeaderProps> = (props) => {
-  const tabs: TabType[] = ['gif', 'links', 'journal'];
+  const tabs: TabType[] = ['gif', 'journal', 'links'];
 
   return (
     <div className='header-container'>
