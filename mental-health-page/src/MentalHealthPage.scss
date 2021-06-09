@@ -66,4 +66,13 @@ html, body, #root {
     grid-column: 2;
     grid-row: 2;
   }
+
+  .note {
+    &-container {
+      border: 1px black solid;
+      background-color: yellow;
+      width: 200px;
+      height: 200px;
+    }
+  }
 }

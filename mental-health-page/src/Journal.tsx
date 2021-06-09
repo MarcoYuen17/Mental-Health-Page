@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Note } from './Note';
 
 export const Journal: React.FC = () => {
   const [newEntryText, setNewEntryText] = useState('');
+  // const [notes, setNotes] = useState<NoteData[]>([]);
 
   const handleChangeEntryText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const modifiedEntryText = e.currentTarget.value;
@@ -10,11 +12,13 @@ export const Journal: React.FC = () => {
   };
 
   const handleAddClicked = () => {
-    console.log('add');
+    console.log('add', newEntryText);
+    setNewEntryText('');
   };
 
   return (
     <div className='journal'>
+      <Note text='test' timeStamp={new Date()} />
       <textarea 
         className='journal-field'
         value={newEntryText}
