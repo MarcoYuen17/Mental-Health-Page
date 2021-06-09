@@ -1,15 +1,9 @@
-type NoteProps = {
-  text: string;
-  timeStamp: Date;
-  position?: {
-    x: number, 
-    y: number
-  };
-}
+import { NoteData } from "./Data"
 
-export const Note: React.FC<NoteProps> = (props) => {
+export const Note: React.FC<NoteData> = (props) => {
   return (
     <div className='note-container'>
+      <p>Time: {props.timeStamp}</p>
       {props.text}
     </div>
   )
