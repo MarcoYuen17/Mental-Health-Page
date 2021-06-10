@@ -13,15 +13,30 @@ export const Journal: React.FC = () => {
   };
 
   const handleAddClicked = () => {
-    console.log('add', newEntryText);
     const newNote: NoteData = {
       text: newEntryText,
       timeStamp: new Date().toLocaleString(),
-      // position: 
+      position: findSpaceForNewNote(0, 0),
     }
     setNotes([...notes, newNote]);
     setNewEntryText('');
   };
+
+  const findSpaceForNewNote = (xToTry: number, yToTry: number) => {
+    let addAtCoords = {
+      x: xToTry,
+      y: yToTry,
+    };
+
+    if (notes.some((existingNote: NoteData) => {
+      return (existingNote.position.x === xToTry &&
+        existingNote.position.y === yToTry);
+    })) {
+      addAtCoords = findSpaceForNewNote(xToTry + 20, yToTry + 20);
+    } 
+    
+    return addAtCoords;
+  }
 
   return (
     <div className='journal'>
