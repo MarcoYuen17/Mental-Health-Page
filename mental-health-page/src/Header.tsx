@@ -7,10 +7,12 @@ type HeaderTabProps = {
 };
 
 const HeaderTab: React.FC<HeaderTabProps> = (props) => {
+  const properLabel = props.label[0].toUpperCase() + props.label.substr(1);
+
   return (
     <div className='header-label' onClick={() => props.onClick(props.label)}>
       <p>
-        {props.label}
+        {properLabel}
       </p>
       {props.isActive && <div className='header-label-selected'/>}
     </div>
@@ -29,7 +31,14 @@ export const Header: React.FC<HeaderProps> = (props) => {
     <div className='header-container'>
       <div/>
       {tabs.map((tab: TabType) => {
-        return <HeaderTab label={tab} isActive={props.activeTab === tab} onClick={props.onChangeSelected} />;
+        return (
+          <HeaderTab 
+            key={tab}
+            label={tab} 
+            isActive={props.activeTab === tab} 
+            onClick={props.onChangeSelected} 
+          />
+        );
       })}
       <div/>
     </div>

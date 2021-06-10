@@ -9,7 +9,6 @@ export const Journal: React.FC = () => {
   const handleChangeEntryText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const modifiedEntryText = e.currentTarget.value;
     setNewEntryText(modifiedEntryText);
-    console.log('modified', modifiedEntryText);
   };
 
   const handleAddClicked = () => {
@@ -40,9 +39,10 @@ export const Journal: React.FC = () => {
 
   return (
     <div className='journal'>
-      {notes.map((noteData: NoteData) => {
+      {notes.map((noteData: NoteData, index: number) => {
         return (
           <Note 
+            key={index}
             text={noteData.text} 
             timeStamp={noteData.timeStamp} 
             position={noteData.position}
