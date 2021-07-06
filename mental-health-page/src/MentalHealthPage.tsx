@@ -1,9 +1,12 @@
 import { useState } from 'react';
-import './MentalHealthPage.scss';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
 import { BreathingGif } from './BreathingGif';
 import { Links } from './Links';
 import { Journal } from './Journal';
 import { Header } from './Header';
+
+import './MentalHealthPage.scss';
 
 export type TabType = 'gif' | 'journal' | 'links';
 
@@ -24,7 +27,9 @@ const MentalHealthPage = () => {
         <BreathingGif />
       </div>
       <div className='mental-health-page-content mental-health-page-content-col2' id='journal'>
-        <Journal />
+        <DndProvider backend={HTML5Backend}>
+          <Journal />
+        </DndProvider>
       </div>
       <div className='mental-health-page-content mental-health-page-content-col3' id='links'>
         <Links />
