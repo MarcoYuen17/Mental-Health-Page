@@ -8,38 +8,17 @@ export const Journal: React.FC = () => {
   const [newEntryText, setNewEntryText] = useState('');
   const [notes, setNotes] = useState<NoteData[]>([]);
 
-  const [{ isOver }, dropRef] = useDrop(() => ({
+  const [{}, dropRef] = useDrop(() => ({
     accept: 'note',
-    // collect: (monitor) => ({
-    //   isOver: monitor.isOver(),
-    // }),
     hover: (item, monitor) => {
-      console.log('hover client offset', monitor.getClientOffset());
       updateNoteCoords(item, monitor.getClientOffset());
     },
-    drop: (item, monitor) => {
-      console.log('dropped');
-      // console.log('item', item);
-      // const item = monitor.getItem()
-      // console.log('init source', monitor.getInitialSourceClientOffset());
-      // console.log('source', monitor.getSourceClientOffset());
-      // console.log('source diff', monitor.getDifferenceFromInitialOffset());
-      // console.log('init client', monitor.getInitialClientOffset());
-      console.log('client', monitor.getClientOffset());
-      // console.log('client diff', monitor.getDifferenceFromInitialOffset());
-
-      // const initialFullPageCoords = monitor.getInitialSourceClientOffset();
-      // const newFullPageCoords = monitor.getSourceClientOffset();
-      const positionDifference = monitor.getClientOffset();
-      // updateNoteCoords(item, positionDifference);
-    }
   }));
 
   const updateNoteCoords = (item: any, positionDifference: XYCoord | null) => {
     const noteItem = item?.props;
-    console.log('noteitem', noteItem);
+
     if (noteItem) {
-      console.log('start item', noteItem);
       const modifiedItem = {
         ...noteItem,
         position: {
@@ -47,7 +26,6 @@ export const Journal: React.FC = () => {
           y: positionDifference?.y,
         }
       };
-      console.log('end item', modifiedItem);
       setNotes([modifiedItem]);
     }
   }
