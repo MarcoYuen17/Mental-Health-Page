@@ -1,16 +1,31 @@
-import { useDrag } from 'react-dnd';
+import { useDrag, XYCoord } from 'react-dnd';
 import { NoteData } from './Data';
 
-export const Note: React.FC<NoteData> = (props) => {
+type NoteProps = {
+  _id: string;
+  text: string;
+  timeStamp: string;
+  position: XYCoord;
+  onDragNote: (note: NoteData, xCoord: number, yCoord: number) => void;
+};
+
+export const Note: React.FC<NoteProps> = (props) => {
 
   const [, dragRef] = useDrag(() => ({
     type: 'note',
-    item: {props},
+    item: props,
   }));
 
   return (
     <div 
       ref={dragRef}
+      onDrag={(e) => {
+        if (e.clientX && e.clientY) {
+          const note: NoteData = {...props};
+          delete (note as any).onDragNote;
+          props.onDragNote(note, e.clientX, e.clientY);
+        }
+      }}
       className='note-container'
       style={{
         position: 'absolute',

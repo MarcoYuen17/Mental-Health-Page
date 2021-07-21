@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDrop, XYCoord } from 'react-dnd';
+import { useDrop } from 'react-dnd';
 import { NoteData } from './Data';
 import { Note } from './Note';
 import ObjectID from 'bson-objectid';
@@ -10,25 +10,7 @@ export const Journal: React.FC = () => {
 
   const [{}, dropRef] = useDrop(() => ({
     accept: 'note',
-    hover: (item, monitor) => {
-      updateNoteCoords(item, monitor.getClientOffset());
-    },
   }));
-
-  const updateNoteCoords = (item: any, positionDifference: XYCoord | null) => {
-    const noteItem = item?.props;
-
-    if (noteItem) {
-      const modifiedItem = {
-        ...noteItem,
-        position: {
-          x: positionDifference?.x,
-          y: positionDifference?.y,
-        }
-      };
-      setNotes([modifiedItem]);
-    }
-  }
 
   const handleChangeEntryText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const modifiedEntryText = e.currentTarget.value;
@@ -62,10 +44,28 @@ export const Journal: React.FC = () => {
     return addAtCoords;
   }
 
+  const handleDragNote = (note: NoteData, xCoord: number, yCoord: number) => {
+    const movedNote = {
+      ...note,
+      position: {
+        x: xCoord,
+        y: yCoord, 
+      },
+    };
+    // console.log('moved note', movedNote);
+    // console.log('new pos', xCoord, yCoord);
+    
+    const modifiedNotes = [...notes];
+    const index = modifiedNotes.findIndex((note: NoteData) => {
+      return note._id === movedNote._id;
+    });
+    modifiedNotes[index] = movedNote;
+    setNotes(modifiedNotes);
+  };
+
   return (
     <div ref={dropRef} className='journal'>
       {notes.map((noteData: NoteData) => {
-        console.log('notes map', noteData);
         return (
           <Note 
             key={noteData._id}
@@ -73,6 +73,7 @@ export const Journal: React.FC = () => {
             text={noteData.text} 
             timeStamp={noteData.timeStamp} 
             position={noteData.position}
+            onDragNote={handleDragNote}
           />
         );
       })}

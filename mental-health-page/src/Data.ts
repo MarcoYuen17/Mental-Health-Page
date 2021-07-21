@@ -1,11 +1,8 @@
-type Position = {
-  x: number;
-  y: number;
-}
+import { XYCoord } from 'react-dnd';
 
 export type NoteData = {
   _id: string;
   text: string;
   timeStamp: string;
-  position: Position;
+  position: XYCoord;
 }

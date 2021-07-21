@@ -3,6 +3,10 @@ html, body, #root {
   scroll-behavior: smooth;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .mental-health-page {
   height: 100%;
   width: 300%;
