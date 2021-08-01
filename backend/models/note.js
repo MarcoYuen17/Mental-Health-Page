@@ -17,9 +17,14 @@ const Note = new Schema({
     required: true,
   },
   position: {
-    x: Number,
-    y: Number,
-    required: true,
+    x: {
+      type: Number,
+      required: true,
+    },
+    y: {
+      type: Number,
+      required: true,
+    },
   },
 });
 

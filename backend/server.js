@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const userRouter = require('./routes/userRouter');
+const noteRouter = require('./routes/noteRouter');
 
 const PORT = 4000;
 require('dotenv').config();
@@ -17,6 +18,7 @@ mongoose.connect(mongodbUri,{
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true,
+  useFindAndModify: false,
 });
 const connection = mongoose.connection;
 
@@ -25,6 +27,7 @@ connection.once('open', () => {
 });
 
 app.use('/users', userRouter);
+app.use('/notes', noteRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
