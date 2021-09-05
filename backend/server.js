@@ -1,7 +1,12 @@
+const fs = require('fs');
+const key = fs.readFileSync('../CA/localhost/localhost.decrypted.key');
+const cert = fs.readFileSync('../CA/localhost/localhost.crt');
+
 const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
+const https = require('https');
 const userRouter = require('./routes/userRouter');
 const noteRouter = require('./routes/noteRouter');
 
@@ -29,6 +34,8 @@ connection.once('open', () => {
 app.use('/users', userRouter);
 app.use('/notes', noteRouter);
 
-app.listen(PORT, () => {
+const server = https.createServer({ key, cert }, app);
+
+server.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
 });
